@@ -21,5 +21,6 @@ public class App {
             cm.exibeMedia();
         }
         System.out.println("Fim");
+        s.close();
     }
 }
