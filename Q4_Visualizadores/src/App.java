@@ -1,26 +1,20 @@
-import java.util.Scanner;
-
 public class App {
-    public static void main(String[] args) throws Exception {
-        var dados = new FonteDeDados();
-        var cm = new VisualizadorDeMedia(dados.getValores());
-        var cs = new VisualizadorDeSomatorio(dados.getValores());
+    public static void main(String[] args) {
+        FonteDeDados fonte = new FonteDeDados();
+        System.out.println("Utilizacao dos 3 visualizadores definidos: ");
+        VisualizadorDeMedia visualizadorMedia = new VisualizadorDeMedia(fonte);
+        VisualizadorDeSomatorio visualizadorSomatorio = new VisualizadorDeSomatorio(fonte);
+        VisualizadorDeMediana visualizadorMediana = new VisualizadorDeMediana(fonte);
+        fonte.add(10);
+        fonte.add(20);
+        fonte.add(30);
+        fonte.add(40);
+        fonte.add(50);
 
-        Scanner s = new Scanner(System.in);
-        int valor = 0;
-        while(true){
-            System.out.println("\nEntre um valor positivo maior que zero (0=fim):");
-            valor = Integer.parseInt(s.nextLine());
-            if (valor == 0){
-                break;
-            }
-            dados.add(valor);
-            cs.acrescentaValor(valor);
-            cm.acrescentaValor(valor);
-            cs.exibeSomatorio();
-            cm.exibeMedia();
-        }
-        System.out.println("Fim");
-        s.close();
+        System.out.println("Removendo visualizador mediana: ");
+        fonte.removeVisualizador(visualizadorMediana);
+        fonte.add(60);
+        fonte.add(70);
+        fonte.add(80);
     }
 }

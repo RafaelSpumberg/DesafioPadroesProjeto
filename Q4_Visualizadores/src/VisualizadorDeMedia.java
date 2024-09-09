@@ -1,25 +1,24 @@
 import java.util.List;
 
-public class VisualizadorDeMedia {
-    private List<Integer> valores;
+public class VisualizadorDeMedia implements Visualizador{
+    private FonteDeDados fonteDeDados;
 
-    public VisualizadorDeMedia(List<Integer> valores){
-        this.valores = valores;
+    public VisualizadorDeMedia(FonteDeDados fonteDeDados){
+        this.fonteDeDados = fonteDeDados;
+        this.fonteDeDados.adicionaVisualizador(this);
     }
 
-    public void defineValores(List<Integer> valores){
-        this.valores = valores;
-    }
-
-    public void acrescentaValor(Integer valor){
-        this.valores.add(valor);
-    }
-
-    public void exibeMedia(){
+    public void exibeMedia() {
+        List<Integer> valores = fonteDeDados.getValores();
         double media = valores.stream()
             .mapToInt(Integer::intValue)
             .average()
             .orElse(0.0);
-        System.out.println("Media: "+media+", quantidade de elementos analisados: "+valores.size());
+        System.out.println("Media: " + media + ", quantidade de elementos analisados: " + valores.size());
+    }
+
+    @Override
+    public void atualiza(){
+        exibeMedia();
     }
 }
